@@ -15,6 +15,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Rarity;
 
+import java.util.function.Consumer;
+
 public final class ModItems {
     public static Item BLOCKOFMANGO;
     public static Item MANGO_LOG;
@@ -98,6 +100,32 @@ public final class ModItems {
                         .effect(new MobEffectInstance(MobEffects.DIG_SPEED, 6000, 1), 1.0F)
                         .effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 3000), 1.0F)
                         .build()));
+    }
+
+    public static void forEachCreativeItem(Consumer<Item> consumer) {
+        consumer.accept(BLOCKOFMANGO);
+        consumer.accept(MANGO_LOG);
+        consumer.accept(MANGO_WOOD);
+        consumer.accept(STRIPPED_MANGO_LOG);
+        consumer.accept(STRIPPED_MANGO_WOOD);
+        consumer.accept(MANGO_PLANKS);
+        consumer.accept(MANGO_STAIR);
+        consumer.accept(MANGO_SLAB);
+        consumer.accept(MANGO_FENCE);
+        consumer.accept(MANGO_FENCE_GATE);
+        consumer.accept(MANGO_BUTTON);
+        consumer.accept(MANGO_PRESSURE_PLATE);
+        consumer.accept(MANGO_DOOR);
+        consumer.accept(MANGO_TRAPDOOR);
+        consumer.accept(MANGO_LEAVES);
+        consumer.accept(MANGO_SAPLING);
+        consumer.accept(MANGO_SIGN);
+        consumer.accept(MANGO_BOAT);
+        consumer.accept(MANGO_CHEST_BOAT);
+        consumer.accept(MANGO);
+        consumer.accept(MANGO_SEED_HELMET);
+        consumer.accept(GOLDEN_MANGO);
+        consumer.accept(ENCHANTED_GOLDEN_MANGO);
     }
 
     private ModItems() {}

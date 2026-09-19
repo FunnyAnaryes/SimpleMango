@@ -8,8 +8,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 public final class ForgePlatformHelper implements IPlatformHelper {
     @Override
     public Item.Properties createItemProperties(boolean creativeTab) {
-        Item.Properties properties = new Item.Properties();
-        return creativeTab ? properties.tab(MangoItemGroup.MANGO) : properties;
+        return new Item.Properties();
     }
 
     @Override

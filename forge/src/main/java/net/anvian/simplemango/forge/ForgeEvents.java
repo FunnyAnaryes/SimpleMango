@@ -6,7 +6,6 @@ import net.anvian.simplemango.block.ModBlocks;
 import net.anvian.simplemango.entity.MangoBoatDispenseItemBehavior;
 import net.anvian.simplemango.entity.ModEntities;
 import net.anvian.simplemango.item.ModItems;
-import net.anvian.simplemango.world.features.ModConfiguredFeatures;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
@@ -31,8 +30,6 @@ public final class ForgeEvents {
 
     public static void registerCompostables(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            ModConfiguredFeatures.setMangoTreeHolder(
-                    MangoModForge.MANGO_TREE.getHolder().get());
             ModEntities.setMangoBoat(MangoModForge.MANGO_BOAT.get());
             ModEntities.setMangoChestBoat(MangoModForge.MANGO_CHEST_BOAT.get());
             ComposterBlock.COMPOSTABLES.put(ModItems.SEED, 0.25F);

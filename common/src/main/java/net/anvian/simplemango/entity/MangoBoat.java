@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class MangoBoat extends Boat {
     public MangoBoat(EntityType<MangoBoat> entityType, Level level) {
         super(entityType, level);
-        setType(Type.OAK);
+        setVariant(Type.OAK);
     }
 
     public MangoBoat(Level level, double x, double y, double z) {

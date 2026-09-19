@@ -2,6 +2,7 @@ package net.anvian.simplemango.block.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -12,7 +13,7 @@ public class MangoFlammableFenceGateBlock extends FenceGateBlock {
     private final int fireSpreadSpeed;
 
     public MangoFlammableFenceGateBlock(BlockBehaviour.Properties properties, int flammability, int fireSpreadSpeed) {
-        super(properties);
+        super(properties, SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN);
         this.flammability = flammability;
         this.fireSpreadSpeed = fireSpreadSpeed;
     }

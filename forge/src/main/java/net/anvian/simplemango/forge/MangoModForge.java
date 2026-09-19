@@ -6,15 +6,10 @@ import net.anvian.simplemango.entity.MangoBoat;
 import net.anvian.simplemango.entity.MangoChestBoat;
 import net.anvian.simplemango.forge.loot.ModLootModifiers;
 import net.anvian.simplemango.item.ModItems;
-import net.anvian.simplemango.world.features.ModConfiguredFeatures;
-import net.anvian.simplemango.world.features.ModPlacedFeatures;
-import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -32,23 +27,6 @@ public final class MangoModForge {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MangoMod.MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MangoMod.MOD_ID);
-    public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES =
-            DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, MangoMod.MOD_ID);
-    public static final DeferredRegister<PlacedFeature> PLACED_FEATURES =
-            DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, MangoMod.MOD_ID);
-
-    public static final RegistryObject<ConfiguredFeature<?, ?>> MANGO_TREE =
-            CONFIGURED_FEATURES.register("mango_tree", ModConfiguredFeatures::createMangoTree);
-    public static final RegistryObject<PlacedFeature> MANGO_CHECKED = PLACED_FEATURES.register(
-            "mango_checked",
-            () -> ModPlacedFeatures.createMangoChecked(MANGO_TREE.getHolder().get()));
-    public static final RegistryObject<ConfiguredFeature<?, ?>> MANGO_SPAWN = CONFIGURED_FEATURES.register(
-            "mango_spawn",
-            () -> ModConfiguredFeatures.createMangoSpawn(
-                    MANGO_CHECKED.getHolder().get()));
-    public static final RegistryObject<PlacedFeature> MANGO_PLACED = PLACED_FEATURES.register(
-            "mango_placed",
-            () -> ModPlacedFeatures.createMangoPlaced(MANGO_SPAWN.getHolder().get()));
     public static final RegistryObject<EntityType<MangoBoat>> MANGO_BOAT = ENTITY_TYPES.register(
             "mango_boat",
             () -> EntityType.Builder.<MangoBoat>of(MangoBoat::new, MobCategory.MISC)
@@ -70,9 +48,8 @@ public final class MangoModForge {
         BLOCKS.register(modBus);
         ITEMS.register(modBus);
         ENTITY_TYPES.register(modBus);
-        CONFIGURED_FEATURES.register(modBus);
-        PLACED_FEATURES.register(modBus);
         ModLootModifiers.register(modBus);
+        modBus.addListener(MangoItemGroup::registerCreativeModeTabs);
         modBus.addListener(ForgeEvents::registerCompostables);
         MinecraftForge.EVENT_BUS.register(ForgeEvents.class);
     }

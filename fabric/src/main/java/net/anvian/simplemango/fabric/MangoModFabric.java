@@ -7,7 +7,6 @@ import net.anvian.simplemango.entity.MangoBoatDispenseItemBehavior;
 import net.anvian.simplemango.entity.MangoChestBoat;
 import net.anvian.simplemango.entity.ModEntities;
 import net.anvian.simplemango.item.ModItems;
-import net.anvian.simplemango.world.features.ModConfiguredFeatures;
 import net.anvian.simplemango.world.features.ModPlacedFeatures;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -17,7 +16,7 @@ import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -38,8 +37,8 @@ public final class MangoModFabric implements ModInitializer {
         registerEntities();
         ModItems.init();
         registerItems();
+        MangoItemGroup.register();
         registerDispenserBehaviors();
-        registerWorldgen();
         registerFlammability();
         registerStrippables();
         registerCompostables();
@@ -74,14 +73,14 @@ public final class MangoModFabric implements ModInitializer {
 
     private static void registerEntities() {
         ModEntities.setMangoBoat(Registry.register(
-                Registry.ENTITY_TYPE,
+                BuiltInRegistries.ENTITY_TYPE,
                 new ResourceLocation(MangoMod.MOD_ID, "mango_boat"),
                 EntityType.Builder.<MangoBoat>of(MangoBoat::new, MobCategory.MISC)
                         .sized(1.375F, 0.5625F)
                         .clientTrackingRange(10)
                         .build(MangoMod.MOD_ID + ":mango_boat")));
         ModEntities.setMangoChestBoat(Registry.register(
-                Registry.ENTITY_TYPE,
+                BuiltInRegistries.ENTITY_TYPE,
                 new ResourceLocation(MangoMod.MOD_ID, "mango_chest_boat"),
                 EntityType.Builder.<MangoChestBoat>of(MangoChestBoat::new, MobCategory.MISC)
                         .sized(1.375F, 0.5625F)
@@ -121,30 +120,6 @@ public final class MangoModFabric implements ModInitializer {
         DispenserBlock.registerBehavior(ModItems.MANGO_CHEST_BOAT, new MangoBoatDispenseItemBehavior(true));
     }
 
-    private static void registerWorldgen() {
-        Registry.register(
-                BuiltinRegistries.CONFIGURED_FEATURE,
-                ModConfiguredFeatures.MANGO_TREE_KEY.location(),
-                ModConfiguredFeatures.createMangoTree());
-        ModConfiguredFeatures.setMangoTreeHolder(
-                BuiltinRegistries.CONFIGURED_FEATURE.getHolderOrThrow(ModConfiguredFeatures.MANGO_TREE_KEY));
-        Registry.register(
-                BuiltinRegistries.PLACED_FEATURE,
-                ModPlacedFeatures.MANGO_CHECKED_KEY.location(),
-                ModPlacedFeatures.createMangoChecked(
-                        BuiltinRegistries.CONFIGURED_FEATURE.getHolderOrThrow(ModConfiguredFeatures.MANGO_TREE_KEY)));
-        Registry.register(
-                BuiltinRegistries.CONFIGURED_FEATURE,
-                ModConfiguredFeatures.MANGO_SPAWN_KEY.location(),
-                ModConfiguredFeatures.createMangoSpawn(
-                        BuiltinRegistries.PLACED_FEATURE.getHolderOrThrow(ModPlacedFeatures.MANGO_CHECKED_KEY)));
-        Registry.register(
-                BuiltinRegistries.PLACED_FEATURE,
-                ModPlacedFeatures.MANGO_PLACED_KEY.location(),
-                ModPlacedFeatures.createMangoPlaced(
-                        BuiltinRegistries.CONFIGURED_FEATURE.getHolderOrThrow(ModConfiguredFeatures.MANGO_SPAWN_KEY)));
-    }
-
     private static void registerFlammability() {
         FlammableBlockRegistry registry = FlammableBlockRegistry.getDefaultInstance();
         registry.add(ModBlocks.MANGO_LOG, 5, 5);
@@ -182,10 +157,10 @@ public final class MangoModFabric implements ModInitializer {
     }
 
     private static void registerBlock(String name, net.minecraft.world.level.block.Block block) {
-        Registry.register(Registry.BLOCK, new ResourceLocation(MangoMod.MOD_ID, name), block);
+        Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(MangoMod.MOD_ID, name), block);
     }
 
     private static void registerItem(String name, net.minecraft.world.item.Item item) {
-        Registry.register(Registry.ITEM, new ResourceLocation(MangoMod.MOD_ID, name), item);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(MangoMod.MOD_ID, name), item);
     }
 }
