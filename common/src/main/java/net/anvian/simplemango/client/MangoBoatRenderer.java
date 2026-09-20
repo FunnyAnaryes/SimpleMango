@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -28,10 +29,9 @@ public final class MangoBoatRenderer extends EntityRenderer<Boat> {
     public MangoBoatRenderer(EntityRendererProvider.Context context, boolean chestBoat) {
         super(context);
         this.shadowRadius = 0.8F;
-        this.model = new BoatModel(context.bakeLayer(
-                chestBoat
-                        ? ModelLayers.createChestBoatModelName(Boat.Type.OAK)
-                        : ModelLayers.createBoatModelName(Boat.Type.OAK)));
+        this.model = chestBoat
+                ? new ChestBoatModel(context.bakeLayer(ModelLayers.createChestBoatModelName(Boat.Type.OAK)))
+                : new BoatModel(context.bakeLayer(ModelLayers.createBoatModelName(Boat.Type.OAK)));
         this.texture = chestBoat ? CHEST_BOAT_TEXTURE : BOAT_TEXTURE;
     }
 
