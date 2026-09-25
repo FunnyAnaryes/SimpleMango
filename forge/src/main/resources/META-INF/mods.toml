@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[44,45)"
+loaderVersion="[45,46)"
 license="GNU GPLv3"
 issueTrackerURL="https://github.com/anviaan/SimpleMango/issues"
 
@@ -17,14 +17,14 @@ logoFile="icon.png"
 [[dependencies.simplemango]]
 modId="forge"
 mandatory=true
-versionRange="[44,45)"
+versionRange="[45,46)"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.simplemango]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.19.3,1.19.4)"
+versionRange="[1.19.4,1.20)"
 ordering="NONE"
 side="BOTH"
 

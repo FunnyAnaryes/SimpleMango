@@ -19,7 +19,7 @@ public final class MangoItemGroup {
                 builder -> builder
                         .icon(() -> new ItemStack(ModItems.MANGO))
                         .title(Component.translatable("itemGroup.simplemango.mango"))
-                        .displayItems((enabledFeatures, entries, operatorEnabled) ->
+                        .displayItems((parameters, entries) ->
                                 ModItems.forEachCreativeItem(item -> entries.accept(item)))
                         .build());
     }

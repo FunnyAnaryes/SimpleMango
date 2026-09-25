@@ -1,7 +1,6 @@
 package net.anvian.simplemango.entity;
 
 import net.anvian.simplemango.block.ModBlocks;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
@@ -20,7 +19,7 @@ final class MangoBoatSupport {
                     boat.resetFallDistance();
                     return;
                 }
-                boat.causeFallDamage(entityFallDistance, 1.0F, DamageSource.FALL);
+                boat.causeFallDamage(entityFallDistance, 1.0F, boat.getLevel().damageSources().fall());
                 if (!boat.getLevel().isClientSide() && !boat.isRemoved()) {
                     boat.kill();
                     if (boat.getLevel().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {

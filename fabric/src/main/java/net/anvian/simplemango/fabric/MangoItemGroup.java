@@ -15,8 +15,8 @@ public final class MangoItemGroup {
     public static void register() {
         MANGO = FabricItemGroup.builder(new ResourceLocation(MangoMod.MOD_ID, "mango"))
                 .icon(() -> new ItemStack(ModItems.MANGO))
-                .displayItems((enabledFeatures, entries, operatorEnabled) ->
-                        ModItems.forEachCreativeItem(item -> entries.accept(item)))
+                .displayItems((parameters, entries) ->
+                        ModItems.forEachCreativeItem(entries::accept))
                 .build();
     }
 }

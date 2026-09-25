@@ -8,8 +8,8 @@ import net.anvian.simplemango.item.custom.ModArmorItem;
 import net.anvian.simplemango.platform.Services;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
@@ -78,7 +78,7 @@ public final class ModItems {
                         .build())
                 .rarity(Rarity.COMMON));
         SEED = new ItemNameBlockItem(ModBlocks.MANGO_SAPLING, plainProperties().rarity(Rarity.COMMON));
-        MANGO_SEED_HELMET = new ModArmorItem(ModArmorMaterial.SEED, EquipmentSlot.HEAD, tabProperties());
+        MANGO_SEED_HELMET = new ModArmorItem(ModArmorMaterial.SEED, ArmorItem.Type.HELMET, tabProperties());
         GOLDEN_MANGO = new Mango(tabProperties()
                 .food(new FoodProperties.Builder()
                         .nutrition(4)

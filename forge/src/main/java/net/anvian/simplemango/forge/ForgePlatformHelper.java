@@ -13,6 +13,6 @@ public final class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public WoodType createWoodType(String name) {
-        return ModWoodTypes.registerReflectively(WoodType.create(name));
+        return ModWoodTypes.createAndRegisterReflectively(name);
     }
 }

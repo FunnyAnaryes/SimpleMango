@@ -1,11 +1,10 @@
 package net.anvian.simplemango.wood;
 
 import net.anvian.simplemango.platform.Services;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 
 public final class ModWoodTypes {
     public static WoodType MANGO;
@@ -19,13 +18,7 @@ public final class ModWoodTypes {
     }
 
     public static WoodType createAndRegisterReflectively(String name) {
-        try {
-            Constructor<WoodType> constructor = WoodType.class.getDeclaredConstructor(String.class);
-            constructor.setAccessible(true);
-            return registerReflectively(constructor.newInstance(name));
-        } catch (ReflectiveOperationException exception) {
-            throw new IllegalStateException("Unable to create Mango wood type", exception);
-        }
+        return registerReflectively(new WoodType(name, BlockSetType.OAK));
     }
 
     public static WoodType registerReflectively(WoodType woodType) {
@@ -37,19 +30,12 @@ public final class ModWoodTypes {
             return existing;
         }
 
-        for (Method method : WoodType.class.getDeclaredMethods()) {
-            if (Modifier.isStatic(method.getModifiers())
-                    && method.getReturnType() == WoodType.class
-                    && method.getParameterCount() == 1
-                    && method.getParameterTypes()[0] == WoodType.class) {
-                try {
-                    method.setAccessible(true);
-                    return (WoodType) method.invoke(null, woodType);
-                } catch (ReflectiveOperationException exception) {
-                    throw new IllegalStateException("Unable to register Mango wood type", exception);
-                }
-            }
+        try {
+            Method register = WoodType.class.getDeclaredMethod("register", WoodType.class);
+            register.setAccessible(true);
+            return (WoodType) register.invoke(null, woodType);
+        } catch (ReflectiveOperationException exception) {
+            throw new IllegalStateException("Unable to register Mango wood type", exception);
         }
-        throw new IllegalStateException("WoodType registration method was not found");
     }
 }
