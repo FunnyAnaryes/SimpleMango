@@ -5,6 +5,9 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
+import java.util.List;
 
 public final class ModWoodTypes {
     public static WoodType MANGO;
@@ -30,8 +33,18 @@ public final class ModWoodTypes {
             return existing;
         }
 
+        List<Method> registerMethods = Arrays.stream(WoodType.class.getDeclaredMethods())
+                .filter(method -> Modifier.isStatic(method.getModifiers()))
+                .filter(method -> method.getReturnType() == WoodType.class)
+                .filter(method -> Arrays.equals(method.getParameterTypes(), new Class<?>[] {WoodType.class}))
+                .toList();
+        if (registerMethods.size() != 1) {
+            throw new IllegalStateException("Unable to register Mango wood type: expected one static "
+                    + "WoodType -> WoodType method, found " + registerMethods.size());
+        }
+
         try {
-            Method register = WoodType.class.getDeclaredMethod("register", WoodType.class);
+            Method register = registerMethods.get(0);
             register.setAccessible(true);
             return (WoodType) register.invoke(null, woodType);
         } catch (ReflectiveOperationException exception) {

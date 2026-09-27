@@ -12,7 +12,7 @@ base {
 }
 
 dependencies {
-    implementation "net.anvian.anvianslib:anvianslib-common-1.19:${rootProject.anvianslib_version}"
+    implementation "net.anvian.anvianslib:anvianslib-common-1.20:${rootProject.anvianslib_version}"
 }
 
 publishing {

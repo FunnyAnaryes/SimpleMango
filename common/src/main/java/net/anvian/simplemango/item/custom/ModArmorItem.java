@@ -46,7 +46,7 @@ public class ModArmorItem extends ArmorItem {
         if (hasCorrectArmorOn(material, player) && !player.hasEffect(effect)) {
             player.addEffect(new MobEffectInstance(effect, 200));
             if (new Random().nextFloat() > 0.8F) {
-                player.getInventory().hurtArmor(player.getLevel().damageSources().magic(), 1.0F, new int[] {0, 1, 2, 3});
+                player.getInventory().hurtArmor(player.level().damageSources().magic(), 1.0F, new int[] {0, 1, 2, 3});
             }
         }
     }

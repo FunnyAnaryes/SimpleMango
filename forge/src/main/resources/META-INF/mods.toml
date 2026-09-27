@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[45,46)"
+loaderVersion="[46,)"
 license="GNU GPLv3"
 issueTrackerURL="https://github.com/anviaan/SimpleMango/issues"
 
@@ -17,20 +17,20 @@ logoFile="icon.png"
 [[dependencies.simplemango]]
 modId="forge"
 mandatory=true
-versionRange="[45,46)"
+versionRange="[46,)"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.simplemango]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.19.4,1.20)"
+versionRange="[1.20,1.20.3)"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.simplemango]]
 modId="anvianslib"
 mandatory=true
-versionRange="[1.4,)"
+versionRange="[1.4.2,)"
 ordering="AFTER"
 side="BOTH"

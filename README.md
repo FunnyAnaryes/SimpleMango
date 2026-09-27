@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/Fabric-1.19.4-green?style=for-the-badge)                 ![](https://img.shields.io/badge/Forge-1.19.4-orange?style=for-the-badge)
+![](https://img.shields.io/badge/Fabric-1.20--1.20.2-green?style=for-the-badge)                 ![](https://img.shields.io/badge/Forge-1.20--1.20.2-orange?style=for-the-badge)
 
 **Simple Mango**
 

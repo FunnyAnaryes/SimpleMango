@@ -49,7 +49,7 @@ public final class MangoModForge {
         ITEMS.register(modBus);
         ENTITY_TYPES.register(modBus);
         ModLootModifiers.register(modBus);
-        modBus.addListener(MangoItemGroup::registerCreativeModeTabs);
+        MangoItemGroup.CREATIVE_MODE_TABS.register(modBus);
         modBus.addListener(ForgeEvents::registerCompostables);
         MinecraftForge.EVENT_BUS.register(ForgeEvents.class);
     }
